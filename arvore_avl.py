@@ -27,6 +27,9 @@ class ArvoreAVL:
             no_atual.esquerda = self._insert(no_atual.esquerda, chave, aluno)
         else:
             no_atual.direita = self._insert(no_atual.direita, chave, aluno)
+            
+        #* Passo 3: atualizar a altura do nó (apos desenvolvimento da função de altura e fator de balanceamento)
+        no_atual.altura = 1 + max(self._get_altura(no_atual.esquerda), self._get_altura(no_atual.direita))
         
         return no_atual
     
@@ -48,7 +51,7 @@ class ArvoreAVL:
         else:
             return self._buscar(no_atual.direita, chave)
         
-    #* Metodos de Percurso
+    #* ===== METODOS DE PERCURSO =====
     def in_order(self):
         '''
         Realiza o processo de percurso a partir da raiz
@@ -108,3 +111,22 @@ class ArvoreAVL:
             
             #* Passo 4: chamada recursiva para o proprio no
             print(no_atual.aluno)     
+            
+    #* ===== METODOS DE VERIFICAR ALTURA E FATOR DE BALANCEAMENTO ===== 
+    
+    #* Metodo _get_altura
+    def _get_altura(self, no):
+        #* Passo 1: verificar se o no é nulo
+        if not no:
+            return 0 #* caso o nó não exista, retorna 0
+        
+        return no.altura #* caso o nó exista, retorna a altura do nó
+    
+    #* Metodo de fator de balanceamento
+    def _get_fator_balanceamento(self, no):
+        #* Passo 1: verificar se o nó é nulo
+        if not no:
+            return 0
+        
+        #* Passo 2: calcular o fator de balanceamento com base na função de altura
+        return self._get_altura(no.direita) - self._get_altura(no.esquerda)
