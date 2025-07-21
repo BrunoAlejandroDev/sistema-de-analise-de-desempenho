@@ -116,6 +116,9 @@ class ArvoreAVL:
     
     #* Metodo _get_altura
     def _get_altura(self, no):
+        '''
+        Método para verificar a altura de um nó
+        '''
         #* Passo 1: verificar se o no é nulo
         if not no:
             return 0 #* caso o nó não exista, retorna 0
@@ -130,3 +133,42 @@ class ArvoreAVL:
         
         #* Passo 2: calcular o fator de balanceamento com base na função de altura
         return self._get_altura(no.direita) - self._get_altura(no.esquerda)
+    
+    #* ===== METODOS DE ROTAÇÃO (DIREITA E ESQUERDA) ===== 
+    def _rotacao_direita(self, z):
+        '''
+        Método para executar uma rotação à direita na subárvore com raiz z
+        '''
+        #* Passo 1: identifica os nós que devem subir (y) e os nós que serão movidos (T3)
+        y = z.esquerda
+        T3 = y.direita
+        
+        #* Passo 2: executar a rotação
+        y.direita = z
+        z.esquerda = T3
+        
+        #* Passo 3: atualiza as alturas
+        z.altura = 1 + max(self._get_altura(z.esquerda), self._get_altura(z.direita))
+        y.altura = 1 + max(self._get_altura(y.esquerda), self._get_altura(y.direita))
+        
+        #* Passo 4: retornar a nova raiz da subarvore
+        return y
+    
+    def _rotacao_esquerda(self, z):
+        '''
+        Método para executar uma rotação à esquerda na subárvore com raiz z.
+        '''
+        #* Passo 1: identifica os nós que devem subir (y) e os nós que serão movidos (T2)
+        y = z.direita
+        T2 = y.esquerda
+
+        #* Passo 2: executar a rotação
+        y.esquerda = z
+        z.direita = T2
+
+        #* Passo 3: atualiza as alturas
+        z.altura = 1 + max(self._get_altura(z.esquerda), self._get_altura(z.direita))
+        y.altura = 1 + max(self._get_altura(y.esquerda), self._get_altura(y.direita))
+
+        #* Passo 4: retornar a nova raiz da subarvore
+        return y
