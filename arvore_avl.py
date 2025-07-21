@@ -47,3 +47,64 @@ class ArvoreAVL:
             return self._buscar(no_atual.esquerda, chave)
         else:
             return self._buscar(no_atual.direita, chave)
+        
+    #* Metodos de Percurso
+    def in_order(self):
+        '''
+        Realiza o processo de percurso a partir da raiz
+        '''
+        print('Percurso Em-Ordem (In-Order)')
+        self._in_order(self.raiz)
+        
+    def _in_order(self, no_atual):
+        #* Passo 1: verificar se o no existe
+        if no_atual is not None:
+            
+            #* Passo 2: chamada recursiva para a esquerda
+            self._in_order(no_atual.esquerda)
+            
+            #* Passo 3: chamada recursiva para o proprio no
+            print(no_atual.aluno)
+            
+            #* Passo 4: chamada recursiva para o no da direita
+            self._in_order(no_atual.direita)
+        
+    def pre_order(self):
+        '''
+        Inicia o percurso em pré-ordem a partir da raiz.
+        '''
+        print('Percurso Pré-Ordem (Pre-Order)')
+        self._pre_order(self.raiz)
+    
+    def _pre_order(self, no_atual):
+        #* Passo 1: verificar se o no existe
+        if no_atual is not None:
+            
+            #* Passo 2: chamada recursiva para o proprio no
+            print(no_atual.aluno)
+            
+            #* Passo 3: chamada recursiva para a esquerda
+            self._pre_order(no_atual.esquerda)
+            
+            #* Passo 4: chamada recursiva para o no da direita
+            self._pre_order(no_atual.direita)
+        
+    def post_order(self):
+        '''
+        Inicia o percurso em pós-ordem a partir da raiz.
+        '''
+        print("Percurso Pós-Ordem (Post-Order)")
+        self._post_order(self.raiz)
+        
+    def _post_order(self, no_atual):
+        #* Passo 1: verificar se o no existe
+        if no_atual is not None:
+            
+            #* Passo 2: chamada recursiva para a esquerda
+            self._post_order(no_atual.esquerda)
+            
+            #* Passo 3: chamada recursiva para o no da direita
+            self._post_order(no_atual.direita)
+            
+            #* Passo 4: chamada recursiva para o proprio no
+            print(no_atual.aluno)     
