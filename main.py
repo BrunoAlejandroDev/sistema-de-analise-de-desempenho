@@ -3,17 +3,17 @@ from pilha import Pilha
 from fila import Fila
 from arvore_avl import ArvoreAVL
 
-aluno1 = Aluno(536498, 'Bruno')
+aluno1 = Aluno(10, 'Bruno')
 # aluno1.adicionar_nota(8.5)
 # aluno1.adicionar_nota(9.0)
 # aluno1.adicionar_falta(2)
 
-aluno2 = Aluno(587910, 'Alicia')
+aluno2 = Aluno(20, 'Alicia')
 # aluno2.adicionar_nota(8)
 # aluno2.adicionar_nota(9.4)
 # aluno2.adicionar_falta(1)
 
-aluno3 = Aluno(matricula=111222, nome='Joaquim')
+aluno3 = Aluno(30, 'Joaquim')
 
 # print(aluno1)
 
@@ -68,6 +68,9 @@ arvore_de_aluno.insert(aluno3.matricula, aluno3)
 print("Alunos inseridos com sucesso!")
 
 print('Testando os percursos')
-arvore_de_aluno.in_order()
+# arvore_de_aluno.in_order()
+# arvore_de_aluno.pre_order()
+# arvore_de_aluno.post_order()
+
+#* ============ TESTE DO BALANCEAMENTO DA ARVORE ==============
 arvore_de_aluno.pre_order()
-arvore_de_aluno.post_order()

@@ -31,6 +31,28 @@ class ArvoreAVL:
         #* Passo 3: atualizar a altura do nó (apos desenvolvimento da função de altura e fator de balanceamento)
         no_atual.altura = 1 + max(self._get_altura(no_atual.esquerda), self._get_altura(no_atual.direita))
         
+        #* Passo 4: Verificar fator de balanceamento
+        balanceamento = self._get_fator_balanceamento(no_atual)
+        
+        #* Passo 5: Caso nó esteja desbalanceado, fazer 4 verificações
+        #* Caso 1: rotação simples a direita
+        if balanceamento < -1 and chave < no_atual.esquerda.chave:
+            return self._rotacao_direita(no_atual)
+        
+        #* Caso 2: rotação simples a esquerda
+        if balanceamento > 1 and chave > no_atual.direita.chave:
+            return self._rotacao_esquerda(no_atual)
+        
+        #* Caso 3: rotação dupla esquerda-direita
+        if balanceamento < -1 and chave > no_atual.esquerda.chave:
+            no_atual.esquerda = self._rotacao_esquerda(no_atual.esquerda)
+            return self._rotacao_direita(no_atual)
+        
+        #* Caso 4: rotação dupla direita-esquerda
+        if balanceamento > 1 and chave < no_atual.direita.chave:
+            no_atual.direita = self._rotacao_direita(no_atual.direita)
+            return self._rotacao_esquerda(no_atual)
+        
         return no_atual
     
     def buscar(self, chave):
