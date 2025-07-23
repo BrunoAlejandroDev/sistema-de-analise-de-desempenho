@@ -286,3 +286,23 @@ class ArvoreAVL:
             return self._rotacao_esquerda(no_atual)
         
         return no_atual
+    
+    #* ===== IMPRIMIR ARVORE =====
+    def display(self):
+        '''
+        Mostra a estrutura da árvore de forma visual
+        '''
+        print("Estrutura visual da arvore")
+        self._display(self.raiz, 0)
+        print("---------------------------------")
+
+    def _display(self, no, level):
+        if no is not None:
+            #* Imprime a subárvore da direita primeiro (para que fique no topo)
+            self._display(no.direita, level + 1)
+            
+            #* Imprime o nó atual com indentação
+            print(' ' * 4 * level + '->', no.chave)
+            
+            #* Imprime a subárvore da esquerda
+            self._display(no.esquerda, level + 1)
