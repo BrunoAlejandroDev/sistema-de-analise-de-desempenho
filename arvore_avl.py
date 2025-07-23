@@ -194,3 +194,95 @@ class ArvoreAVL:
 
         #* Passo 4: retornar a nova raiz da subarvore
         return y
+    
+    #* ===== METODO DE REMOÇÃO =====
+    def remover(self, chave):
+        '''
+        Método público para remover um nó da árvore por meio da matrícula do aluno (chave)
+        '''
+        print('Remover aluno via matricula')
+        self.raiz = self._remover(self.raiz, chave)
+        
+    def _get_menor_no_subarvore_direita(self, no):
+        '''
+        Método para encontrar o menor nó da subárvore da direita
+        '''
+        if no is None or no.esquerda is None:
+            return no
+        
+        return self._get_menor_no_subarvore_direita(no.esquerda)
+    
+    def _remover(self, no_atual, chave):
+        '''
+        Método recursivo para auxiliar o método de remoção público e balancear a árvore
+        '''
+        #* Verificar se o nó atual existe
+        if not no_atual:
+            print(f'Erro: Aluno com matricula {chave} não encontrado')
+            return no_atual
+        
+        #* Buscar Nó que será removido
+        if chave < no_atual.chave: #* Caso 1: verificar a esquerda
+            no_atual.esquerda = self._remover(no_atual.esquerda, chave)
+        elif chave > no_atual.chave: #* Caso 2: verificar a direita
+            no_atual.direita = self._remover(no_atual.direita, chave)
+        
+        #* Nó encontrado, começar remoção
+        else:
+            #* Caso 1 e 2 -> nó com 0 ou 1 filho    
+            if no_atual.esquerda is None:
+                temp = no_atual.direita
+                print(f'-- removendo aluno com matricula: {no_atual.chave}')
+                no_atual = None #* retira a referência do nó
+                return temp
+            
+            elif no_atual.direita is None:
+                temp = no_atual.esquerda
+                print(f'-- removendo aluno com matricula: {no_atual.chave}')
+                no_atual = None #* retira a referencia do nó
+                return temp
+            
+            #* Caso 3 -> nó com 2 filhos
+            print(f'-- removendo aluno com matricula: {no_atual.chave}')
+            temp = self._get_menor_no_subarvore_direita(no_atual.direita)
+            no_atual.chave = temp.chave #* copiar dados do proximo nó
+            no_atual.aluno = temp.aluno #* copiar dados do proximo nó
+            no_atual.direita = self._remover(no_atual.direita, temp.chave)
+
+            print('-- remocao concluida com sucesso.')
+                   
+        #* Rebalancear a arvore apos remoção
+        if no_atual is None:
+            return no_atual
+        
+        #* Passo 1: atualizar a altura do nó (apos desenvolvimento da função de altura e fator de balanceamento)
+        no_atual.altura = 1 + max(self._get_altura(no_atual.esquerda), self._get_altura(no_atual.direita))
+        
+        #* Passo 2: Verificar fator de balanceamento
+        balanceamento = self._get_fator_balanceamento(no_atual)
+        
+        #* Passo 3: Caso nó esteja desbalanceado, fazer 4 verificações
+        
+        #* Caso 1: rotação simples a direita (esquerda-esquerda)
+        if balanceamento < -1 and self._get_fator_balanceamento(no_atual.esquerda) <= 0:
+            print('rotacao direita simples')
+            return self._rotacao_direita(no_atual)
+        
+        #* Caso 2: rotação simples a esquerda (direita-direita)
+        if balanceamento > 1 and chave > self._get_fator_balanceamento(no_atual.direita) >= 0:
+            print('rotacao esquerda simples')
+            return self._rotacao_esquerda(no_atual)
+        
+        #* Caso 3: rotação dupla esquerda-direita
+        if balanceamento < -1 and self._get_fator_balanceamento(no_atual.esquerda) > 0:
+            print('rotacao dupla esquerda-direita')
+            no_atual.esquerda = self._rotacao_esquerda(no_atual.esquerda)
+            return self._rotacao_direita(no_atual)
+        
+        #* Caso 4: rotação dupla direita-esquerda
+        if balanceamento > 1 and self._get_fator_balanceamento(no_atual.direita) < 0:
+            print('rotacao dupla direita-esquerda')
+            no_atual.direita = self._rotacao_direita(no_atual.direita)
+            return self._rotacao_esquerda(no_atual)
+        
+        return no_atual

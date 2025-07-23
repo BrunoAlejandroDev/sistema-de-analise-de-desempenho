@@ -3,17 +3,17 @@ from pilha import Pilha
 from fila import Fila
 from arvore_avl import ArvoreAVL
 
-aluno1 = Aluno(10, 'Bruno')
+# aluno1 = Aluno(10, 'Bruno')
 # aluno1.adicionar_nota(8.5)
 # aluno1.adicionar_nota(9.0)
 # aluno1.adicionar_falta(2)
 
-aluno2 = Aluno(20, 'Alicia')
+# aluno2 = Aluno(20, 'Alicia')
 # aluno2.adicionar_nota(8)
 # aluno2.adicionar_nota(9.4)
 # aluno2.adicionar_falta(1)
 
-aluno3 = Aluno(30, 'Joaquim')
+# aluno3 = Aluno(30, 'Joaquim')
 
 # print(aluno1)
 
@@ -60,17 +60,35 @@ aluno3 = Aluno(30, 'Joaquim')
 # print(f'Fila vazia? {fila_teste.is_empty()}')
 
 #* ============ TESTE DOS PERCURSOS DA ARVORE ==============
-arvore_de_aluno = ArvoreAVL()
-print("Inserindo alunos na árvore")
-arvore_de_aluno.insert(aluno1.matricula, aluno1)
-arvore_de_aluno.insert(aluno2.matricula, aluno2)
-arvore_de_aluno.insert(aluno3.matricula, aluno3)
-print("Alunos inseridos com sucesso!")
+# arvore_de_aluno = ArvoreAVL()
+# print("Inserindo alunos na árvore")
+# arvore_de_aluno.insert(aluno1.matricula, aluno1)
+# arvore_de_aluno.insert(aluno2.matricula, aluno2)
+# arvore_de_aluno.insert(aluno3.matricula, aluno3)
+# print("Alunos inseridos com sucesso!")
 
-print('Testando os percursos')
+# print('Testando os percursos')
 # arvore_de_aluno.in_order()
 # arvore_de_aluno.pre_order()
 # arvore_de_aluno.post_order()
 
 #* ============ TESTE DO BALANCEAMENTO DA ARVORE ==============
-arvore_de_aluno.pre_order()
+# arvore_de_aluno.pre_order()
+
+#* ============ TESTE DA REMOÇÃO DA ARVORE ==============
+arvore_teste_remocao = ArvoreAVL()
+arvore_teste_remocao.insert(20, Aluno(20, "Roberto"))
+arvore_teste_remocao.insert(10, Aluno(10, "Ana"))
+arvore_teste_remocao.insert(30, Aluno(30, "Carlos"))
+
+arvore_teste_remocao.insert(40, Aluno(40, "Daniel"))
+    
+print("\narvore completa antes da remocao - pre-order")
+arvore_teste_remocao.pre_order()
+
+#* Testando a remoção de um nó
+print('\nRemocao')
+arvore_teste_remocao.remover(10)
+
+print('\narvore apos a remocao - pre-order')
+arvore_teste_remocao.pre_order()
