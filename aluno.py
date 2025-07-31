@@ -56,4 +56,4 @@ class Aluno:
         '''
         Retorna uma representação em string do objeto Aluno, para facilitar a impressão.
         '''
-        return f"Matrícula: {self.matricula} | Nome: {self.nome} | Média: {self.media_geral:.2f} | Faltas: {self.faltas}"
+        return f"Matrícula: {self.matricula} | Nome: {self.nome.capitalize()} | Média: {self.media_geral:.2f} | Faltas: {self.faltas}"
