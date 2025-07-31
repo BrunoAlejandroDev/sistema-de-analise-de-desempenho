@@ -33,28 +33,29 @@ def main():
         #* Opcao 1: cadastrar aluno
         if opcao == '1':
             try:
-
-                matricula = int(input('Digite a matricula: '))
-                nome = input('Digite o nome: ')
+                print('\nProcesso Atual: Cadastrar Aluno')
+                matricula = int(input('- Digite a matricula: '))
+                nome = input('- Digite o nome: ')
 
                 #* Verificar se aluno já existe no sistema
                 if arvore_alunos.buscar(matricula):
-                    print('Erro. Matricula já cadastrada no sistema.')
+                    print('- Erro. Matricula já cadastrada no sistema.')
                 else:
                     novo_aluno = Aluno(matricula, nome)
                     arvore_alunos.insert(matricula, novo_aluno)
                     pilhas_historico[matricula] = Pilha()
-                    print(f'Aluno {nome} cadastrado com sucesso.')
+                    print(f'-- Aluno {nome} - {matricula} foi cadastrado com sucesso.')
 
             except ValueError:
-                print('Erro. A matricula deve ser um número')
+                print('- Erro. A matricula deve ser um número')
 
         #* Opcao 2: Lançar relatório
         elif opcao == '2':
             try:
+                print('\nProcesso Atual: Cadastrar Relatótio no Sistema')
                 #* Variaveis
-                matricula = int(input('Digite a matrícula: '))
-                nota = float(input('Digite a nota a ser adicionada: '))
+                matricula = int(input('- Digite a matrícula: '))
+                nota = float(input('- Digite a nota a ser adicionada: '))
 
                 #* Verificar se aluno está presente no sistema para adicionar nota
                 if arvore_alunos.buscar(matricula):
@@ -63,18 +64,19 @@ def main():
                         'nota' : nota
                     }
                     fila_relatorios.enqueue(relatorio) #* adiciona o relatorio na fila de processamento
-                    print('Relatório adicionado com sucesso à fila de processamento.')
+                    print('-- Relatório adicionado com sucesso à fila de processamento.')
                 else:
-                    print(f'Aluno com matricula {matricula} não identificado no sistema.')
+                    print(f'-- Aluno com matricula {matricula} não identificado no sistema.')
 
             except ValueError:
-                print('Erro. A matricula deve ser um número')
+                print('- Erro. A matricula deve ser um número')
 
         #* Opcao 3: processar fila de relatórios cadastrados
         elif opcao == '3':
+            print('\nProcesso Atual: Processar Relatórios')
             #* Verificar se existem relatorios a serem preenchidos
             if fila_relatorios.is_empty():
-                print('A fila de relatórios está vazia.')
+                print('- A fila de relatórios está vazia.')
             else:
                 relatorio = fila_relatorios.dequeue()
                 aluno = arvore_alunos.buscar(relatorio['matricula']) #* buscar os relatorios de um aluno com base na matricula
@@ -88,13 +90,13 @@ def main():
                     pilha_relatorios_aluno.push(estado_antigo)
 
                     aluno.adicionar_nota(relatorio['nota'])
-                    print(f'Relatório processado para o aluno {aluno.nome}\nNova média: {aluno.media_geral:.2f}')
+                    print(f'- Relatório processado para o aluno {aluno.nome}\n- Nova média: {aluno.media_geral:.2f}')
 
         #* Opcao 4: procurar aluno
         elif opcao == '4':
             try:
                 print('\n=== Processo Atual: Procurar por Aluno no Sistema ===')
-                matricula = int(input('Digite a matricula a ser buscada: '))
+                matricula = int(input('- Digite a matricula a ser buscada: '))
                 aluno = arvore_alunos.buscar(matricula)
 
                 if aluno: #* se o aluno tiver sido encontrado
@@ -102,7 +104,7 @@ def main():
                     print(aluno)
 
             except ValueError:
-                print('Erro. A matricula deve ser um número')
+                print('- Erro. A matricula deve ser um número')
 
         #* Opcao 5: listar alunos
         elif opcao == '5':
