@@ -1,9 +1,9 @@
 
 #* Importacoes de arquivo
-from arvore_avl import ArvoreAVL
-from fila import Fila
-from pilha import Pilha
-from aluno import Aluno
+from sadhe.structures.arvore_avl import ArvoreAVL
+from sadhe.structures.fila import Fila
+from sadhe.structures.pilha import Pilha
+from sadhe.models.aluno import Aluno
 
 #* Menu interativo
 def exibir_menu():
