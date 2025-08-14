@@ -1,7 +1,7 @@
 
-#* Importacoes
-from avl_node import AvlNode
-from aluno import Aluno
+#* Importacoes de arquivo
+from sadhe.models.avl_node import AvlNode
+from sadhe.models.aluno import Aluno
 
 class ArvoreAVL:
     """

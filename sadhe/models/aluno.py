@@ -1,6 +1,10 @@
 class Aluno:
     '''
-    Representa um aluno no sistema e suas informações
+    Sobre: Representa um aluno no sistema e suas informações.
+    Métodos: 
+        adicionar_nota
+        adicionar_falta
+        adicionar_dificuldade
     '''
     #* Construtor da classe
     def __init__(self, matricula: int, nome: str):

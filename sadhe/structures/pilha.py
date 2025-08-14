@@ -1,4 +1,6 @@
-from node import Node
+
+#* Importacoes de arquivo
+from sadhe.models.node import Node
 
 class Pilha:
     '''

@@ -1,6 +1,6 @@
 
 #* Importacoes
-from node import Node
+from sadhe.models.node import Node
 
 class Fila:
     '''
