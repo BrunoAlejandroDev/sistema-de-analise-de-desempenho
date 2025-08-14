@@ -306,3 +306,15 @@ class ArvoreAVL:
             
             #* Imprime a subárvore da esquerda
             self._display(no.esquerda, level + 1)
+
+    #* === SERIALIZAÇÃO DA ARVORE ===
+    def _serializar(self, no_atual, chave):
+        
+        #* Caso base
+        if no_atual is None:
+            return None
+        else:
+            aluno = Aluno()
+            dict_arvore = {
+                'chave' : chave,
+            }

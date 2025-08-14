@@ -70,3 +70,17 @@ class Pilha:
             no_atual = no_atual.proximo
             
         return ' -> '.join(lista_elementos)
+    
+    def to_list(self):
+        '''
+        Converte a pilha para o formato de lista.
+        '''
+        itens = []
+        no_atual = self.topo
+
+        while no_atual:
+            itens.append(no_atual.dado)
+            no_atual = no_atual.proximo
+        
+        itens.reverse() #* estrutura os itens da lista da base para o topo
+        return itens
