@@ -4,6 +4,7 @@ from sadhe.structures.arvore_avl import ArvoreAVL
 from sadhe.structures.fila import Fila
 from sadhe.structures.pilha import Pilha
 from sadhe.models.aluno import Aluno
+from gerenciador_dados import salvar_arquivo
 
 #* Menu interativo
 def exibir_menu():
@@ -149,6 +150,7 @@ def main():
 
         #* Opcao 9: sair
         elif opcao == '9':
+            salvar_arquivo(arvore_alunos, pilhas_historico, 'data/dados_sadhe.json')
             print('\n=== Saindo do Sistema ===')
             break
 
