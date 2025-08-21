@@ -25,7 +25,7 @@ class ArvoreAVL:
         #* Passo 2: Passos recursivos
         if chave < no_atual.chave: #* o no atual recebe novamente seu filho da esquerda
             no_atual.esquerda = self._insert(no_atual.esquerda, chave, aluno)
-        else:
+        elif chave > no_atual.chave:
             no_atual.direita = self._insert(no_atual.direita, chave, aluno)
             
         #* Passo 3: atualizar a altura do nó (apos desenvolvimento da função de altura e fator de balanceamento)
@@ -269,7 +269,7 @@ class ArvoreAVL:
             return self._rotacao_direita(no_atual)
         
         #* Caso 2: rotação simples a esquerda (direita-direita)
-        if balanceamento > 1 and chave > self._get_fator_balanceamento(no_atual.direita) >= 0:
+        if balanceamento > 1 and self._get_fator_balanceamento(no_atual.direita) >= 0:
             print('rotacao esquerda simples')
             return self._rotacao_esquerda(no_atual)
         
@@ -308,13 +308,34 @@ class ArvoreAVL:
             self._display(no.esquerda, level + 1)
 
     #* === SERIALIZAÇÃO DA ARVORE ===
-    def _serializar(self, no_atual, chave):
-        
+    def serializar(self):
+        '''
+        Método para iniciar o processo de serialização da árvore em um dicionário
+        '''
+        return self._serializar(self.raiz)
+
+    def _serializar(self, no_atual):
+        '''
+        Método recursivo para converter a árvore de nós em dicionários aninhados
+        '''
         #* Caso base
         if no_atual is None:
             return None
-        else:
-            aluno = Aluno()
-            dict_arvore = {
-                'chave' : chave,
-            }
+    
+        #* Converter os dados do objeto Aluno em um dicionário
+        aluno_dict = {
+            'matricula' : no_atual.aluno.matricula,
+            'nome' : no_atual.aluno.nome,
+            'notas' : no_atual.aluno.notas,
+            'faltas' : no_atual.aluno.faltas,
+            'conteudos_com_dificuldade' : no_atual.aluno.conteudos_com_dificuldade,
+            'media_geral' : no_atual.aluno.media_geral
+        }
+
+        return {
+            'chave' : no_atual.chave,
+            'aluno' : aluno_dict,
+            'altura' : no_atual.altura,
+            'esquerda' : self._serializar(no_atual.esquerda),
+            'direita' : self._serializar(no_atual.direita)
+        }
